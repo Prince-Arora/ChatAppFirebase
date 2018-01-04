@@ -18,6 +18,7 @@ public class RegisterActivity extends AppCompatActivity {
 private EditText mEmail;
 private EditText mPassword;
 private Button mButton;
+private android.support.v7.widget.Toolbar  mToolbar;
 private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,11 @@ private FirebaseAuth mAuth;
         mEmail=(EditText)findViewById(R.id.Edit1_register);
         mPassword=(EditText)findViewById(R.id.Edit2_register);
         mButton=(Button) findViewById(R.id.create_account_button);
+        mToolbar=(android.support.v7.widget.Toolbar )findViewById(R.id.register_appbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("Create Account");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         mAuth=FirebaseAuth.getInstance();
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
