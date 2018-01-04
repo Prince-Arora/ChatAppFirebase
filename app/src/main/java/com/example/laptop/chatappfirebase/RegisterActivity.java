@@ -1,5 +1,6 @@
 package com.example.laptop.chatappfirebase;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,6 +36,9 @@ private FirebaseAuth mAuth;
                         if(task.isSuccessful())
                         {
                             Toast.makeText(RegisterActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                            Intent i=new Intent(RegisterActivity.this,MainActivity.class);
+                            startActivity(i);
+                            finish();
                         }
                         else
                         {

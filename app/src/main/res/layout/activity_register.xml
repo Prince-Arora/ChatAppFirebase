@@ -20,12 +20,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/Edit1_register"
+
         />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Enter password"
         android:textSize="24sp"
+        android:password="true"
         />
     <EditText
         android:layout_width="match_parent"
