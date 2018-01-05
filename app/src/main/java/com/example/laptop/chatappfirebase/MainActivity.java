@@ -1,6 +1,11 @@
 package com.example.laptop.chatappfirebase;
 
 import android.content.Intent;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,16 +17,24 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
  private FirebaseAuth mAuth;
+ private android.support.v4.view.ViewPager mViewPager;
+ private TabLayout mTablayout;
+ private sectionsPageAdapter mSectionsPageAdapter;
+ private FragmentPagerAdapter mPagerAdapter;
     private android.support.v7.widget.Toolbar  mToolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth=FirebaseAuth.getInstance();
+        mTablayout=(android.support.design.widget.TabLayout)findViewById(R.id.tabs_layout);
         mToolbar=(android.support.v7.widget.Toolbar)findViewById(R.id.main_page_activity);
+        mViewPager=(android.support.v4.view.ViewPager)findViewById(R.id.viewpager);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Cool Chat");
-
+        mSectionsPageAdapter=new sectionsPageAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(mSectionsPageAdapter);
+        mTablayout.setupWithViewPager(mViewPager);
     }
     @Override
     public void onStart() {
