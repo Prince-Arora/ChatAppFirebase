@@ -23,7 +23,8 @@
             android:name=".RegisterActivity"
             android:parentActivityName=".StartActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".AccountActivity"></activity>
+        <activity android:name=".AccountActivity" />
+        <activity android:name=".StatusActivity"></activity>
     </application>
 
 </manifest>

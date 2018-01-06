@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.example.laptop.chatappfirebase.StatusActivity">
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/linearLayout2">
+
+    <include
+        android:id="@+id/status_app_bar_layout"
+        layout="@layout/app_bar_layout"
+        />
+    <TextView
+        android:layout_width="381dp"
+        android:layout_height="wrap_content"
+        android:text="Your status..."
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edittextstatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+</LinearLayout>
+
+    <Button
+        android:id="@+id/status_upload_button"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/linearLayout2"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_marginEnd="13dp"
+        android:layout_marginTop="17dp"
+        android:text="Upload"
+        android:background="@color/colorAccent"
+        android:textColor="#ffffff"
+        />
+</RelativeLayout>
