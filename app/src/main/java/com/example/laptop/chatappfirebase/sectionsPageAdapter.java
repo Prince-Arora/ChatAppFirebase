@@ -16,25 +16,25 @@ public class sectionsPageAdapter extends FragmentPagerAdapter {
     }
 
     @Override
-        public Fragment getItem(int position) {
-            switch (position) {
-                case 0: {
-                    RequestFragment req = new RequestFragment();
-                    return req;
-                }
-                case 1: {
-                    ChatsFragment chat = new ChatsFragment();
-                    return chat;
-                }
-                case 2: {
-                    FriendsFragment friend = new FriendsFragment();
-                    return friend;
-                }
-                default:
-                {
-                    return null;
-                }
+    public Fragment getItem(int position) {
+        switch (position) {
+            case 0: {
+                RequestFragment req = new RequestFragment();
+                return req;
             }
+            case 1: {
+
+                ChatsFragment chat = new ChatsFragment();
+                return chat;
+            }
+            case 2: {
+                FriendsFragment friend = new FriendsFragment();
+                return friend;
+            }
+            default: {
+                return null;
+            }
+        }
 
     }
 
@@ -42,4 +42,19 @@ public class sectionsPageAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return 3;
     }
+
+    public CharSequence getPageTitle(int pos) {
+            switch (pos) {
+            case 0:
+                return "REQUESTS";
+            case 1:
+                return "CHATS";
+            case 2:
+                return "FRIENDS";
+            default:
+                return null;
+
+        }
+    }
 }
+

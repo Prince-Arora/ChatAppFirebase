@@ -3,6 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/Account_settings_menu"
+        android:title="Account Settings" />
+    <item
 
         android:id="@+id/main_menu_logout"
         android:title="@string/log_out" />

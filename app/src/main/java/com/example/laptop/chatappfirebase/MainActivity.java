@@ -17,11 +17,15 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
  private FirebaseAuth mAuth;
+
  private android.support.v4.view.ViewPager mViewPager;
+
  private TabLayout mTablayout;
+
  private sectionsPageAdapter mSectionsPageAdapter;
- private FragmentPagerAdapter mPagerAdapter;
+
     private android.support.v7.widget.Toolbar  mToolbar;
+    private FragmentPagerAdapter mFragmentPagerAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Cool Chat");
         mSectionsPageAdapter=new sectionsPageAdapter(getSupportFragmentManager());
-        mViewPager.setAdapter(mSectionsPageAdapter);
+        mViewPager.setAdapter(mFragmentPagerAdapter);
         mTablayout.setupWithViewPager(mViewPager);
     }
     @Override
@@ -53,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.main_menu,menu);
-
         return true;
     }
 
@@ -67,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
                  Intent startactivity=new Intent(MainActivity.this,StartActivity.class);
                  startActivity(startactivity);
                  finish();
+             }
+             if(item.getItemId()==R.id.Account_settings_menu)
+             {
+               Intent i=new Intent(MainActivity.this,AccountActivity.class);
+               startActivity(i);
              }
              return true;
     }
