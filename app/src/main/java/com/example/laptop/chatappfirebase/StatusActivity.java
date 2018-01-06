@@ -1,5 +1,6 @@
 package com.example.laptop.chatappfirebase;
 
+import android.app.ProgressDialog;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +21,8 @@ public class StatusActivity extends AppCompatActivity {
 //private DatabaseReference mdbref;
     private EditText mStatusget;
     private Button mStatusBut;
+    private ProgressDialog mprogress;
+
     private FirebaseAuth mAuth;
     private DatabaseReference myRef;
     @Override
@@ -29,29 +32,37 @@ public class StatusActivity extends AppCompatActivity {
        mToolbar=(android.support.v7.widget.Toolbar)findViewById(R.id.status_app_bar_layout);
         setSupportActionBar(mToolbar);
         mAuth = FirebaseAuth.getInstance();
-
+        mStatusget =(EditText)findViewById(R.id.edittextstatus);
+        String status_value=getIntent().getStringExtra("status");
+        mStatusget.setText(status_value);
+        mprogress=new ProgressDialog(this);
         getSupportActionBar().setTitle("Status");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mStatusget =(EditText)findViewById(R.id.edittextstatus);
+
         mStatusBut=(Button)findViewById(R.id.status_upload_button);
        // mdbref=
         mStatusBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                mprogress.setTitle("Upload Status");
+                mprogress.setMessage("Please Wait...");
+                mprogress.show();
                 String getstatus=mStatusget.getText().toString();
                 FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                 String uid = currentUser.getUid();
-
                 myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Status");
                 myRef.setValue(getstatus).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                    if(task.isSuccessful())
                    {
+                       mprogress.dismiss();
                        finish();
                    }
                    else
                    {
+                       mprogress.hide();
                        Toast.makeText(StatusActivity.this, "Problem", Toast.LENGTH_SHORT).show();
                    }
 
@@ -60,6 +71,7 @@ public class StatusActivity extends AppCompatActivity {
 
             }
         });
+
 
     }
 

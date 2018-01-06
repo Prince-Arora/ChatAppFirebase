@@ -9,4 +9,8 @@
 
         android:id="@+id/main_menu_logout"
         android:title="@string/log_out" />
+    <item
+
+        android:id="@+id/main_menu_users"
+        android:title="All Users" />
 </menu>
