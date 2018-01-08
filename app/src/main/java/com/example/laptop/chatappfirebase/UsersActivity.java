@@ -39,6 +39,7 @@ private DatabaseReference muser;
         @Override
         protected void populateViewHolder(UsersViewHolder viewHolder, Users model, int position) {
         viewHolder.SetName(model.GetName());
+        viewHolder.SetStatus(model.GetStatus());
         }
 
     };
@@ -55,7 +56,15 @@ private DatabaseReference muser;
             TextView mText = (TextView) mView.findViewById(R.id.user_text1);
             mText.setText(nm);
 
-        }    }
+
+        }
+        public void  SetStatus(String status) {
+            TextView mText = (TextView) mView.findViewById(R.id.user_text2);
+            mText.setText(status);
+
+
+        }
+    }
 
 
 

@@ -2,6 +2,7 @@ package com.example.laptop.chatappfirebase;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,7 +27,12 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
+
+import id.zelory.compressor.Compressor;
 
 public class AccountActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
@@ -63,7 +69,9 @@ private de.hdodenhof.circleimageview.CircleImageView disimg;
                 String Thumb = dataSnapshot.child("thumbnail").getValue().toString();
                 disName.setText(name);
                 disStatus.setText(status);
-                Picasso.with(AccountActivity.this).load(Profile_pic).into(disimg);
+                if (!Profile_pic.equals("default")) {
+                    Picasso.with(AccountActivity.this).load(Profile_pic).placeholder(R.drawable.common_google_signin_btn_icon_light).into(disimg);
+                }
             }
 
             @Override
@@ -100,14 +108,10 @@ private de.hdodenhof.circleimageview.CircleImageView disimg;
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == GALLERY_PICK && resultCode == RESULT_OK) {
             Uri imageuri = data.getData();
-    mprogress.setTitle("Uploading...");
-    mprogress.setMessage("Wait for some time...");
-    mprogress.show();
-
-
             CropImage.activity(imageuri).setAspectRatio(1,1)
                     .start(this);
             String uuiidd=muser.getUid();
+
             StorageReference fileref = mStorageRef.child("Profile_images").child(uuiidd +".jpg");
             fileref.putFile(imageuri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -143,7 +147,26 @@ private de.hdodenhof.circleimageview.CircleImageView disimg;
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
+                mprogress.setTitle("Uploading...");
+                mprogress.setMessage("Wait for some time...");
+                mprogress.show();
                 Uri resultUri = result.getUri();
+
+
+                File thumb_file_path=new File(resultUri.getPath());
+
+                try {
+                    Bitmap thumb_bitmap=new Compressor(this).setMaxWidth(200).setMaxHeight(200)
+                            .setQuality(75)
+                            .compressToBitmap(thumb_file_path);
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    thumb_bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] data1 = baos.toByteArray();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }

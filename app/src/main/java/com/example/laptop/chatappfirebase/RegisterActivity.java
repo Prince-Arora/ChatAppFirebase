@@ -50,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String Email = mEmail.getText().toString();
                 String Password = mPassword.getText().toString();
                 final String Name = mName.getText().toString();
-                if (!TextUtils.isEmpty(Email) || !TextUtils.isEmpty(Password) || TextUtils.isEmpty(Name)) {
+                if (!TextUtils.isEmpty(Email) || !TextUtils.isEmpty(Password) || !TextUtils.isEmpty(Name)) {
                     mprogressdialog.setTitle("Registering User...");
                     mprogressdialog.setMessage("Please wait until you are registered...");
                     mprogressdialog.setCanceledOnTouchOutside(false);
