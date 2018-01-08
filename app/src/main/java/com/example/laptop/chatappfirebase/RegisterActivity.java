@@ -30,7 +30,6 @@ public class RegisterActivity extends AppCompatActivity {
     private android.support.v7.widget.Toolbar mToolbar;
     private FirebaseAuth mAuth;
     private DatabaseReference myRef;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,14 +37,12 @@ public class RegisterActivity extends AppCompatActivity {
         mEmail = (EditText) findViewById(R.id.Edit1_register);
         mPassword = (EditText) findViewById(R.id.Edit2_register);
         mName = (EditText) findViewById(R.id.edit_text_name);
-
         mButton = (Button) findViewById(R.id.create_account_button);
         mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.register_appbar);
         mprogressdialog = new ProgressDialog(this);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Create Account");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         mAuth = FirebaseAuth.getInstance();
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,10 +50,9 @@ public class RegisterActivity extends AppCompatActivity {
                 String Email = mEmail.getText().toString();
                 String Password = mPassword.getText().toString();
                 final String Name = mName.getText().toString();
-
                 if (!TextUtils.isEmpty(Email) || !TextUtils.isEmpty(Password) || TextUtils.isEmpty(Name)) {
                     mprogressdialog.setTitle("Registering User...");
-                    mprogressdialog.setMessage("Please wait unti you are registered..");
+                    mprogressdialog.setMessage("Please wait until you are registered...");
                     mprogressdialog.setCanceledOnTouchOutside(false);
                     mprogressdialog.show();
                     mAuth.createUserWithEmailAndPassword(Email, Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -65,7 +61,6 @@ public class RegisterActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                                 String uid = currentUser.getUid();
-
                                 myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
                                 HashMap<String, String> values = new HashMap<>();
                                 values.put("Name", Name);
@@ -87,8 +82,6 @@ public class RegisterActivity extends AppCompatActivity {
                                         }
                                     }
                                 });
-
-
                             }
                         }
 
@@ -97,6 +90,4 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }
